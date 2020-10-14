@@ -1,12 +1,6 @@
 package io.sentry;
 
-import com.google.gson.FieldNamingStrategy;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
+import com.google.gson.*;
 import com.google.gson.internal.Excluder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -43,9 +37,9 @@ final class UnknownPropertiesTypeAdapterFactory implements TypeAdapterFactory {
         (TypeAdapter<IUnknownPropertiesConsumer>) gson.getDelegateAdapter(this, typeToken);
     // Excluder is necessary to check if the field can be processed
     // Basically it's not required, but it makes the check more complete
-    final Excluder excluder = gson.excluder();
+    final Excluder excluder = Excluder.DEFAULT;
     // This is crucial to map fields and JSON object properties since Gson supports name remapping
-    final FieldNamingStrategy fieldNamingStrategy = gson.fieldNamingStrategy();
+    final FieldNamingStrategy fieldNamingStrategy = FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
     final TypeAdapter<IUnknownPropertiesConsumer> unknownPropertiesTypeAdapter =
         UnknownPropertiesTypeAdapter.create(
             rawType, delegateTypeAdapter, excluder, fieldNamingStrategy);

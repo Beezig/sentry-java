@@ -34,7 +34,7 @@ object Config {
         val appCompat = "androidx.appcompat:appcompat:1.2.0"
         val timber = "com.jakewharton.timber:timber:4.7.1"
         // only bump gson if https://github.com/google/gson/issues/1597 is fixed
-        val gson = "com.google.code.gson:gson:2.8.5"
+        val gson = "com.google.code.gson:gson:2.2.4"
         val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.4"
 
         private val lifecycleVersion = "2.2.0"

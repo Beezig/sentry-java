@@ -15,6 +15,8 @@ import io.sentry.protocol.Gpu;
 import io.sentry.protocol.OperatingSystem;
 import io.sentry.protocol.SentryRuntime;
 import java.lang.reflect.Type;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,7 +39,8 @@ public final class ContextsDeserializerAdapter implements JsonDeserializer<Conte
         final JsonObject jsonObject = json.getAsJsonObject();
 
         if (jsonObject != null && !jsonObject.isJsonNull()) {
-          for (final String key : jsonObject.keySet()) {
+          for (final String key :
+              jsonObject.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toList())) {
             switch (key) {
               case App.TYPE:
                 App app = parseObject(context, jsonObject, key, App.class);
